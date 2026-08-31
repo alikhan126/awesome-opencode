@@ -1,0 +1,44 @@
+name: Veris Daytona
+repo: https://github.com/veris-ai/veris-daytona/tree/main/daytona-opencode
+tagline: Run each OpenCode session in a Daytona sandbox whose vendor API calls hit Veris twins
+description: |
+  OpenCode plugin that runs every session inside a Daytona sandbox where outbound
+  third-party API calls are answered by stateful Veris twins instead of the real vendor.
+
+  - One entry in `opencode.json` — no code changes, no base-URL overrides, no test doubles
+  - Code under test keeps its production hostnames, credentials, and client libraries
+  - Every run prints a receipt of what the sandbox actually received, so a green test
+    that quietly stopped calling its dependency is visible instead of silent
+  - Faults the real vendor will not produce on demand (rate limits, timeouts, 5xx,
+    revoked credentials, duplicate webhooks) are seedable
+scope:
+  - global
+  - project
+tags:
+  - sandbox
+  - integration-testing
+  - daytona
+  - veris
+  - testing
+homepage: https://www.npmjs.com/package/@veris-ai/daytona-opencode
+installation: |
+  ## Prerequisites
+  - A Daytona API key
+  - A Veris environment ID
+
+  ## Installation
+  Add the plugin to your `opencode.json`:
+  ```json
+  {
+    "plugin": ["@veris-ai/daytona-opencode"]
+  }
+  ```
+
+  ## Configuration
+  ```bash
+  export DAYTONA_API_KEY="..."
+  export VERIS_ENVIRONMENT_ID="..."
+  ```
+
+  ## Removal
+  Remove the entry from the `plugin` array in `opencode.json`.

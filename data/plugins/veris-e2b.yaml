@@ -1,0 +1,44 @@
+name: Veris E2B
+repo: https://github.com/veris-ai/veris-e2b/tree/main/e2b-opencode
+tagline: Run each OpenCode session in an E2B sandbox whose vendor API calls hit Veris twins
+description: |
+  OpenCode plugin that runs every session inside an E2B sandbox where outbound
+  third-party API calls are answered by stateful Veris twins instead of the real vendor.
+
+  - One entry in `opencode.json` — no code changes, no base-URL overrides, no test doubles
+  - Code under test keeps its production hostnames, credentials, and client libraries
+  - Every run prints a receipt of what the sandbox actually received, so a suite that
+    stopped calling its dependency cannot pass silently
+  - Seedable faults (rate limits, timeouts, 5xx, revoked credentials, out-of-order
+    webhooks) make unhappy paths testable rather than assumed
+scope:
+  - global
+  - project
+tags:
+  - sandbox
+  - integration-testing
+  - e2b
+  - veris
+  - testing
+homepage: https://www.npmjs.com/package/@veris-ai/e2b-opencode
+installation: |
+  ## Prerequisites
+  - An E2B API key
+  - A Veris environment ID
+
+  ## Installation
+  Add the plugin to your `opencode.json`:
+  ```json
+  {
+    "plugin": ["@veris-ai/e2b-opencode"]
+  }
+  ```
+
+  ## Configuration
+  ```bash
+  export E2B_API_KEY="..."
+  export VERIS_ENVIRONMENT_ID="..."
+  ```
+
+  ## Removal
+  Remove the entry from the `plugin` array in `opencode.json`.

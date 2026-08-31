@@ -1,0 +1,45 @@
+name: Veris Sim
+repo: https://github.com/veris-ai/plugins/tree/main/veris-sim
+tagline: Test your app against stateful twins of the external services it calls
+description: |
+  Plugin that wires an OpenCode repo to Veris — stateful, contract-accurate twins of the
+  third-party services an application calls — and ships three commands as skills:
+
+  - `$veris-sim:setup` — wire a repo to a Veris environment once
+  - `$veris-sim:build <issue|prompt>` — measure the real vendor's behaviour before
+    designing against it, then prove the change through `veris-proxy`
+  - `$veris-sim:fix <issue|prompt>` — reproduce a failure against the twin, then fix it
+
+  The code under test is never modified and never told: it keeps its production hostnames,
+  credentials, and client library, and `veris-proxy` reroutes its outbound HTTP(S) into the
+  sandbox from outside the process. Each run prints a receipt of what the sandbox actually
+  received, and a run whose receipt is empty exits non-zero. Bundles an MCP server for
+  sandbox lifecycle (create, reset, promote, delete).
+scope:
+  - global
+  - project
+tags:
+  - integration-testing
+  - sandbox
+  - mcp-server
+  - skills
+  - veris
+homepage: https://www.npmjs.com/package/@veris-ai/veris-sim-opencode
+installation: |
+  ## Installation
+  Add the plugin to your `opencode.json`:
+  ```json
+  {
+    "plugin": ["@veris-ai/veris-sim-opencode"]
+  }
+  ```
+
+  ## Usage
+  Run the setup command once per repo:
+  ```
+  $veris-sim:setup
+  ```
+  Then use `$veris-sim:build <issue>` or `$veris-sim:fix <issue>`.
+
+  ## Removal
+  Remove the entry from the `plugin` array in `opencode.json`.
